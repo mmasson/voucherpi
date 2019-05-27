@@ -68,7 +68,11 @@ $printer -> setEmphasis(true);
 $printer -> text("  Download speed:");
 $printer -> setEmphasis(false);
 $printer -> text("  ".($vouchers[0]->qos_rate_max_down/1024)." Mbps \n");
-$printer -> feed(2);
+$printer -> setEmphasis(true);
+$printer -> text("  Notes:");
+$printer -> setEmphasis(false);
+$printer -> text("  ".$vouchers[0]->note."\n");
+$printer -> feed(4);
 $printer -> cut();
 $printer -> close();
 
