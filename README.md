@@ -10,6 +10,12 @@ When the button is pressed it creates a voucher on a Unifi controller and prints
 5. Add `sh /home/pi/voucherpi/button.sh` to `/etc/rc.local`.
 6. Reboot.
 
-# Includes and makes use of these projects:
+
+# Credits and references:
+
+## Includes and makes use of these projects:
 * mike42/escpos-php : https://github.com/mike42/escpos-php
 * Art-of-WiFi/UniFi-API-client : https://github.com/Art-of-WiFi/UniFi-API-client
+
+## Based in part on Adafruit's Instant Camera using Raspberry Pi and Thermal Printer project
+* https://learn.adafruit.com/instant-camera-using-raspberry-pi-and-thermal-printer/system-setup
