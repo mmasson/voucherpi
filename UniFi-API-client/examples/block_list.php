@@ -3,33 +3,32 @@
  * PHP API usage example
  *
  * contributed by: @malcolmcif, based on another Art of WiFi example
- * description: basic PHP script to block a list of mac addresses passed in via command line,
- *              output is to console in non json format
+ * description:    basic PHP script to block a list of mac addresses passed in via command line,
+ *                 output is to console in non json format
  *
  * usage:
  *  php block_list.php <list of comma seperated mac addresses>
  *
  * example:
  *  php block_list.php 09:09:09:09:09:09,10:10:10:10:10:10
- *
  */
 
 /**
  * using the composer autoloader
  */
-require_once('vendor/autoload.php');
+require_once 'vendor/autoload.php';
 
 /**
  * include the config file (place your credentials etc. there if not already present)
  * see the config.template.php file for an example
  */
-require_once('config.php');
-
+require_once 'config.php';
 $debug = false;
+
 /**
  * the MAC address(es) of the device(s) to block
  */
-$macs_to_block = explode(',',$argv[1]);
+$macs_to_block = explode(',', $argv[1]);
 
 /**
  * The site to authorize the device with
@@ -47,9 +46,9 @@ $unifi_connection = new UniFi_API\Client($controlleruser, $controllerpassword, $
 $set_debug_mode   = $unifi_connection->set_debug($debug);
 $loginresults     = $unifi_connection->login(); // always true regardless of site id
 
-foreach ($macs_to_block as &$mac) {
+foreach ($macs_to_block as $mac) {
     // block_result is always true even if mac address does not exist :(
-    $block_result   = $unifi_connection->block_sta($mac);
+    $block_result = $unifi_connection->block_sta($mac);
 
     /**
      * NOTE:
@@ -61,7 +60,7 @@ foreach ($macs_to_block as &$mac) {
      */
     sleep(1);
 
-    $getid_result   = $unifi_connection->stat_client($mac);
+    $getid_result = $unifi_connection->stat_client($mac);
 
     if (property_exists($getid_result[0], "oui")) {
         // this field(manufacturer) seems to exist on valid mac addresses
